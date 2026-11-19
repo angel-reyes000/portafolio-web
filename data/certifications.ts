@@ -15,6 +15,12 @@ export const issuers: Issuer[] = [
   { id: "midudev", name: "midudev", shortName: "midudev" },
 ];
 
+/**
+ * Emisores que van primero en el filtro "Todas", en este orden. El resto sigue
+ * con el orden de `certifications`. Dentro de cada emisor se respeta ese mismo orden.
+ */
+export const issuersFirstInAll: string[] = ["cisco", "ibm"];
+
 /** Imagen de una certificación. Si no pasas `height`, se asume una insignia cuadrada. */
 const badge = (file: string, title: string, width: number, height = width) => ({
   src: `/images/certifications/${file}.webp`,

@@ -10,9 +10,11 @@ interface CertificationExplorerProps {
   certifications: Certification[];
   issuers: Issuer[];
   credlyUrl: string;
+  /** Emisores que aparecen primero en "Todas", en ese orden. */
+  firstInAll?: string[];
 }
 
-export function CertificationExplorer({ certifications, issuers, credlyUrl }: CertificationExplorerProps) {
+export function CertificationExplorer({ certifications, issuers, credlyUrl, firstInAll = [] }: CertificationExplorerProps) {
   const [filter, setFilter] = useState<string>("todas");
   const [selected, setSelected] = useState<Certification | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -30,7 +32,15 @@ export function CertificationExplorer({ certifications, issuers, credlyUrl }: Ce
       .filter((option) => option.count > 0),
   ];
 
-  const visible = filter === "todas" ? certifications : certifications.filter((cert) => cert.issuerId === filter);
+  // En "Todas", los emisores de `firstInAll` van primero; el orden estable conserva el resto.
+  const rank = (cert: Certification) => {
+    const index = firstInAll.indexOf(cert.issuerId);
+    return index === -1 ? firstInAll.length : index;
+  };
+  const visible =
+    filter === "todas"
+      ? [...certifications].sort((a, b) => rank(a) - rank(b))
+      : certifications.filter((cert) => cert.issuerId === filter);
 
   // Abre el modal cuando ya existe contenido, para que el foco inicial funcione.
   useEffect(() => {
