@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { certifications, courses, credlyProfileUrl, issuers } from "@/data/certifications";
+import { certifications, courses, credlyProfileUrl, issuers, issuersFirstInAll } from "@/data/certifications";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
@@ -45,7 +45,12 @@ export default function CertificationsPage() {
 
       <section className="py-12 sm:py-16" aria-label="Galería de certificaciones">
         <Container>
-          <CertificationExplorer certifications={certifications} issuers={issuers} credlyUrl={credlyProfileUrl} />
+          <CertificationExplorer
+            certifications={certifications}
+            issuers={issuers}
+            credlyUrl={credlyProfileUrl}
+            firstInAll={issuersFirstInAll}
+          />
         </Container>
       </section>
 
