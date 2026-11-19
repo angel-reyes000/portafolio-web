@@ -9,7 +9,7 @@ export const experience: Experience[] = [
     id: "schneider-electric-2026",
     role: "Application Developer Intern",
     company: "Schneider Electric",
-    employmentType: "Prácticas profesionales",
+    employmentType: "Application Developer",
     startDate: "2026-08",
     summary:
       "Desarrollo de aplicaciones internas y soluciones empresariales sobre SAP, con prompts de IA usados por equipos de distintas regiones.",
