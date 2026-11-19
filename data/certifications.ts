@@ -36,7 +36,6 @@ const badge = (file: string, title: string, width: number, height = width) => ({
 export const certifications: Certification[] = [
   { id: "midudev-aprende-sql", title: "Aprende SQL - Curso completo", issuerId: "midudev", year: 2026, credentialUrl: "https://certificados.midudev.com/ffce7e10-9886-478c-a1ff-0557bcbd6c46.pdf", image: badge("midudev-aprende-sql", "Aprende SQL", 855, 600) },
   { id: "anthropic-claude-code-101", title: "Claude Code 101", issuerId: "anthropic", year: 2026, image: badge("anthropic-claude-code-101", "Claude Code 101", 886, 602) },
-  { id: "anthropic-introduccion-subagentes", title: "Introducción a los subagentes", issuerId: "anthropic", image: badge("anthropic-introduccion-subagentes", "Introducción a los subagentes", 266, 281) },
   { id: "udemy-langchain-langgraph-agentes", title: "Curso Completo: LangChain, LangGraph y Agentes IA con Python", issuerId: "udemy", year: 2026, credentialUrl: "https://ude.my/UC-ceb307e1-28e8-44cb-aaf6-d669f4dd451e", image: badge("udemy-langchain-langgraph-agentes", "LangChain, LangGraph y Agentes IA con Python", 1200, 893) },
   { id: "sap-basic-abap-programming", title: "Learning Basic ABAP Programming", issuerId: "sap", image: badge("sap-basic-abap-programming", "Learning Basic ABAP Programming", 207, 212) },
   { id: "aws-cloud-foundations", title: "AWS Academy Graduate - Cloud Foundations", issuerId: "aws", image: badge("aws-cloud-foundations", "AWS Cloud Foundations", 601) },
@@ -80,6 +79,7 @@ export const courses: Course[] = [
   { title: "Programación de Redes", provider: "Edube Interactive" },
   { title: "Procesamiento de archivos y comunicación con el entorno", provider: "Edube Interactive" },
   { title: "Claude 101", provider: "Anthropic Academy" },
+  { title: "Introducción a los subagentes", provider: "Anthropic Academy" },
   { title: "CRUD con Express (Node.js) y PostgreSQL", provider: "Udemy" },
   { title: "CRUD básico usando FastAPI", provider: "Udemy" },
   { title: "React", provider: "Documentación oficial (react.dev)" },

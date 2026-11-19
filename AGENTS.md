@@ -189,8 +189,8 @@ Contenido conservado: 10 proyectos (con enlaces a demo, GitHub y Figma), experie
 Añadido desde el CV: nombre completo, ubicación, formación 2023–2027 y cursos complementarios.
 
 Actualización con el CV 2026 (`public/cv/angel-reyes-cv.pdf`): experiencia en Schneider Electric, Nobum, Prologix y
-NSG - Engineering; rol "Desarrollador Full Stack"; séptimo semestre; 5 certificaciones nuevas (Anthropic ×2, Udemy,
-SAP, midudev) y cursos de Claude 101, Next.js, TypeScript, Tailwind CSS, Express + PostgreSQL y FastAPI.
+NSG - Engineering; rol "Desarrollador Full Stack"; séptimo semestre; 4 certificaciones nuevas (Anthropic, Udemy,
+SAP, midudev) y cursos de Claude 101, Introducción a los subagentes, Next.js, TypeScript, Tailwind CSS, Express + PostgreSQL y FastAPI.
 También: proyectos Wallet AI y Nova AI (destacados junto con NextDo PRO; el asistente educativo y el chatbot de
 Botpress siguen en /proyectos sin destacar) y habilidades del CV (TypeScript, FastAPI, Django, SQLAlchemy,
 LangChain, LangGraph, ChromaDB, Tailwind CSS, React Native, Claude Code y especialidades en agentes de IA, RAG y ERP).
