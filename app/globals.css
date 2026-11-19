@@ -72,6 +72,8 @@ body {
  * Capa fija detrás de todo el contenido, así cubre cada página completa.
  * Se usa un pseudo-elemento fijo en lugar de `background-attachment: fixed`,
  * que iOS ignora y que obliga a repintar en cada scroll.
+ * Es la versión estática: se ve mientras carga el JavaScript y con
+ * `prefers-reduced-motion`. Encima, `<SphereBackground />` dibuja la animada.
  */
 body::before {
   content: "";
@@ -90,6 +92,73 @@ body::before {
   body::before {
     background-image: linear-gradient(var(--veil), var(--veil)), url("/images/background/fondo.webp");
   }
+}
+
+/*
+ * Fondo de esferas animado (components/layout/SphereBackground.tsx).
+ * Recreación en CSS de `fondo.webp`; colores y proporciones medidos píxel a píxel
+ * sobre la imagen original. El movimiento lo controla el componente.
+ */
+.sphere-field {
+  /* Degradado vertical: negro rojizo arriba, rojo oscuro abajo. */
+  --field-1: rgb(9 0 0);
+  --field-2: rgb(18 0 0);
+  --field-3: rgb(33 0 0);
+  --field-4: rgb(54 0 0);
+  --field-5: rgb(60 0 0);
+
+  /* Esfera: núcleo rojo sólido → degradado a negro → anillo negro. */
+  --sphere-core: #ff0202;
+  --sphere-ring: #000;
+  --sphere-core-end: 29%; /* hasta aquí el rojo es sólido */
+  --sphere-ring-start: 90%; /* aquí el degradado ya llegó a negro */
+
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+  background: linear-gradient(
+    to bottom,
+    var(--field-1) 0%,
+    var(--field-1) 46.3%,
+    var(--field-2) 55.6%,
+    var(--field-3) 70.4%,
+    var(--field-4) 83.3%,
+    var(--field-5) 94.4%
+  );
+  /* Aparece sobre la imagen estática cuando el componente toma el relevo. */
+  opacity: 0;
+  transition: opacity 400ms ease-out;
+}
+
+.sphere-field[data-active] {
+  opacity: 1;
+}
+
+/* Mismo velo que la imagen estática, para conservar el contraste del texto. */
+.sphere-field::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--veil);
+}
+
+.sphere {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    var(--sphere-core) var(--sphere-core-end),
+    var(--sphere-ring) var(--sphere-ring-start)
+  );
+  opacity: 0;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 ::selection {

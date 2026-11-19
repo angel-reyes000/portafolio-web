@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight, FiDownload, FiMapPin } from "react-icons/fi";
 import { ExperienceItem } from "@/components/experience/ExperienceItem";
@@ -22,7 +21,6 @@ const stats = [
   { value: projects.length, label: "Proyectos" },
   { value: certifications.length, label: "Certificaciones" },
   { value: issuers.length, label: "Instituciones emisoras" },
-  { value: education[0]?.endYear ?? "—", label: "Egreso previsto" },
 ];
 
 const stack = skillGroups
@@ -37,7 +35,7 @@ export default function HomePage() {
 
       {/* Hero */}
       <section className="border-b border-border" aria-labelledby="hero-title">
-        <Container className="grid items-center gap-12 py-16 sm:py-24 lg:grid-cols-[1.4fr_1fr] lg:py-28">
+        <Container className="py-16 sm:py-24 lg:py-28">
           <div>
             <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 font-mono text-xs text-muted">
               <span className="size-1.5 rounded-full bg-accent" aria-hidden="true" />
@@ -62,19 +60,6 @@ export default function HomePage() {
               <FiMapPin className="size-4" aria-hidden="true" />
               {profile.location}
             </p>
-          </div>
-
-          <div className="mx-auto w-full max-w-xs sm:max-w-sm lg:max-w-none">
-            <div className="relative aspect-square overflow-hidden rounded-2xl border border-border bg-surface">
-              <Image
-                src={profile.photo.src}
-                alt={profile.photo.alt}
-                fill
-                preload
-                sizes="(min-width: 1024px) 400px, 384px"
-                className="object-cover"
-              />
-            </div>
           </div>
         </Container>
       </section>

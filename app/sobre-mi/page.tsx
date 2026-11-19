@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { FiDownload, FiMapPin } from "react-icons/fi";
 import { EducationItem } from "@/components/education/EducationItem";
 import { CtaBanner } from "@/components/shared/CtaBanner";
@@ -23,23 +22,13 @@ export default function AboutPage() {
     <>
       <PageHeader
         eyebrow="Sobre mí"
-        title="Ingeniero en Desarrollo de Software en formación"
+        title="Ingeniero en Desarrollo de Software"
         description="Combino el desarrollo full stack con el análisis de requerimientos y la optimización de procesos empresariales."
       />
 
       <section className="py-16 sm:py-20" aria-label="Biografía">
         <Container className="grid gap-12 lg:grid-cols-[1fr_1.6fr]">
           <aside className="flex flex-col gap-6">
-            <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-2xl border border-border bg-surface lg:mx-0">
-              <Image
-                src={profile.photo.src}
-                alt={profile.photo.alt}
-                fill
-                preload
-                sizes="(min-width: 1024px) 400px, 384px"
-                className="object-cover"
-              />
-            </div>
             <Card className="p-5">
               <p className="text-base font-semibold text-fg">{profile.fullName}</p>
               <p className="text-sm text-muted">{profile.role}</p>
