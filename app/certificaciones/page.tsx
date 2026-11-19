@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { certifications, courses, credlyProfileUrl, issuers, issuersFirstInAll } from "@/data/certifications";
+import { aos, stagger } from "@/lib/aos";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
@@ -31,8 +32,8 @@ export default function CertificationsPage() {
       <section className="border-b border-border" aria-label="Certificaciones por institución">
         <Container>
           <dl className="grid grid-cols-2 gap-x-8 py-4 sm:grid-cols-4">
-            {issuers.map((issuer) => (
-              <div key={issuer.id} className="py-4">
+            {issuers.map((issuer, index) => (
+              <div key={issuer.id} {...aos("fade-up", stagger(index, 4))} className="py-4">
                 <dt className="text-sm text-muted">{issuer.name}</dt>
                 <dd className="mt-1 text-3xl font-semibold tracking-tight text-fg">
                   {certifications.filter((cert) => cert.issuerId === issuer.id).length}
@@ -63,8 +64,8 @@ export default function CertificationsPage() {
             description="Cursos que complementan mi formación académica y certificaciones."
           />
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {courses.map((course) => (
-              <Card as="li" key={course.title} className="flex items-start gap-3 p-5">
+            {courses.map((course, index) => (
+              <Card as="li" key={course.title} {...aos("fade-up", stagger(index))} className="flex items-start gap-3 p-5">
                 <FiBookOpen className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
                 <div>
                   <p className="text-sm font-semibold text-fg">{course.title}</p>

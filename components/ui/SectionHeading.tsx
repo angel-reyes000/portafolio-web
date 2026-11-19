@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
+import { aos } from "@/lib/aos";
 import { cn } from "@/lib/utils";
 
 interface SectionHeadingProps {
@@ -15,7 +16,7 @@ interface SectionHeadingProps {
 export function SectionHeading({ title, description, eyebrow, id, action, className }: SectionHeadingProps) {
   return (
     <div className={cn("mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between", className)}>
-      <div className="max-w-2xl">
+      <div {...aos("fade-up")} className="max-w-2xl">
         {eyebrow && <p className="mb-2 font-mono text-xs uppercase tracking-widest text-accent">{eyebrow}</p>}
         <h2 id={id} className="text-2xl font-semibold tracking-tight text-fg sm:text-3xl">
           {title}
@@ -24,6 +25,7 @@ export function SectionHeading({ title, description, eyebrow, id, action, classN
       </div>
       {action && (
         <Link
+          {...aos("fade-left", 150)}
           href={action.href}
           className="group inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-accent-hover"
         >

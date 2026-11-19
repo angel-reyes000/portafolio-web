@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { FiExternalLink, FiX, FiZoomIn } from "react-icons/fi";
 import type { Certification, Issuer } from "@/types/content";
+import { aos, stagger } from "@/lib/aos";
 import { FilterChips, type FilterOption } from "@/components/ui/FilterChips";
 
 interface CertificationExplorerProps {
@@ -65,14 +66,16 @@ export function CertificationExplorer({ certifications, issuers, credlyUrl, firs
 
   return (
     <div>
-      <FilterChips label="Filtrar certificaciones por institución" options={options} value={filter} onChange={setFilter} />
+      <div {...aos("fade-up")}>
+        <FilterChips label="Filtrar certificaciones por institución" options={options} value={filter} onChange={setFilter} />
+      </div>
       <p className="sr-only" aria-live="polite">
         {visible.length} certificaciones mostradas
       </p>
 
       <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {visible.map((cert) => (
-          <li key={cert.id}>
+        {visible.map((cert, index) => (
+          <li key={cert.id} {...aos("fade-up", stagger(index, 4, 75))}>
             <button
               type="button"
               onClick={() => open(cert)}

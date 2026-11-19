@@ -9,6 +9,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { education } from "@/data/education";
 import { profile } from "@/data/profile";
 import { siteConfig } from "@/data/site";
+import { aos, stagger } from "@/lib/aos";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
@@ -29,7 +30,7 @@ export default function AboutPage() {
       <section className="py-16 sm:py-20" aria-label="Biografía">
         <Container className="grid gap-12 lg:grid-cols-[1fr_1.6fr]">
           <aside className="flex flex-col gap-6">
-            <Card className="p-5">
+            <Card {...aos("fade-right")} className="p-5">
               <p className="text-base font-semibold text-fg">{profile.fullName}</p>
               <p className="text-sm text-muted">{profile.role}</p>
               <p className="mt-3 inline-flex items-center gap-2 text-sm text-muted">
@@ -50,20 +51,20 @@ export default function AboutPage() {
           <div>
             <div className="flex flex-col gap-5 text-lg leading-relaxed text-muted">
               {profile.about.map((paragraph) => (
-                <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+                <p key={paragraph.slice(0, 32)} {...aos("fade-up")}>{paragraph}</p>
               ))}
             </div>
 
             <dl className="mt-10 grid gap-4 sm:grid-cols-3">
-              {profile.highlights.map((item) => (
-                <Card key={item.label} className="p-5">
+              {profile.highlights.map((item, index) => (
+                <Card key={item.label} {...aos("fade-up", stagger(index))} className="p-5">
                   <dt className="text-sm text-muted">{item.label}</dt>
                   <dd className="mt-1 text-xl font-semibold tracking-tight text-fg">{item.value}</dd>
                 </Card>
               ))}
             </dl>
 
-            <div className="mt-10">
+            <div {...aos("fade-up")} className="mt-10">
               <h2 className="text-lg font-semibold tracking-tight text-fg">Áreas de interés</h2>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {profile.interests.map((interest) => (

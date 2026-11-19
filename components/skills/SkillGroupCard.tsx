@@ -1,10 +1,11 @@
 import type { SkillGroup } from "@/types/content";
 import { Card } from "@/components/ui/Card";
 import { Icon } from "@/components/ui/Icon";
+import { aos } from "@/lib/aos";
 
-export function SkillGroupCard({ group }: { group: SkillGroup }) {
+export function SkillGroupCard({ group, delay = 0 }: { group: SkillGroup; delay?: number }) {
   return (
-    <Card as="section" className="flex h-full flex-col p-6" >
+    <Card as="section" {...aos("fade-up", delay)} className="flex h-full flex-col p-6" >
       <div className="flex items-center gap-3">
         <span className="flex size-10 items-center justify-center rounded-lg bg-accent-soft text-accent">
           <Icon name={group.icon} className="size-5" />

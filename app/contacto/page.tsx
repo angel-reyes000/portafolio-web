@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { contactChannels, primaryContact } from "@/data/contact";
 import { profile } from "@/data/profile";
 import { siteConfig } from "@/data/site";
+import { aos, stagger } from "@/lib/aos";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
@@ -29,12 +30,12 @@ export default function ContactPage() {
       <section className="py-16 sm:py-20" aria-label="Canales de contacto">
         <Container className="grid gap-8 lg:grid-cols-[1.6fr_1fr]">
           <ul className="grid gap-4 sm:grid-cols-2">
-            {contactChannels.map((channel) => (
-              <ContactChannelCard key={channel.id} channel={channel} />
+            {contactChannels.map((channel, index) => (
+              <ContactChannelCard key={channel.id} channel={channel} delay={stagger(index, 2)} />
             ))}
           </ul>
 
-          <Card as="aside" className="flex flex-col p-6 sm:p-8">
+          <Card as="aside" {...aos("fade-left")} className="flex flex-col p-6 sm:p-8">
             <h2 className="text-lg font-semibold tracking-tight text-fg">Currículum</h2>
             <p className="mt-2 text-sm leading-relaxed text-muted">
               Consulta mi experiencia, formación, certificaciones y habilidades en un solo documento.

@@ -2,6 +2,7 @@ import { FiArrowRight, FiDownload } from "react-icons/fi";
 import { siteConfig } from "@/data/site";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Container";
+import { aos } from "@/lib/aos";
 
 interface CtaBannerProps {
   title?: string;
@@ -16,7 +17,7 @@ export function CtaBanner({
   return (
     <section aria-labelledby="cta-title" className="py-16 sm:py-24">
       <Container>
-        <div className="flex flex-col items-start gap-6 rounded-2xl border border-border bg-surface p-8 sm:p-12 lg:flex-row lg:items-center lg:justify-between">
+        <div {...aos("zoom-in")} className="flex flex-col items-start gap-6 rounded-2xl border border-border bg-surface p-8 sm:p-12 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-xl">
             <h2 id="cta-title" className="text-2xl font-semibold tracking-tight text-fg sm:text-3xl">
               {title}

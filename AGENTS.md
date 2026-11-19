@@ -71,7 +71,8 @@ components/
   seo/PersonJsonLd.tsx     Datos estructurados schema.org/Person
 data/                      ÚNICA fuente de contenido (ver abajo)
 types/content.ts           Interfaces de todo el contenido
-lib/                       icons.ts (registro de iconos), metadata.ts (createPageMetadata), utils.ts
+lib/                       icons.ts (registro de iconos), metadata.ts (createPageMetadata), utils.ts,
+                           aos.ts (atributos de animación AOS)
 public/images/             profile/, projects/, certifications/, background/ (WebP)
 public/cv/                 angel-reyes-cv.pdf
 scripts/optimize-images.mjs  Convierte imágenes a WebP optimizado
@@ -144,13 +145,20 @@ para un tono formal:
   visibilidad del fondo, ajusta la opacidad de `--veil`.
 - **Movimiento**: fondo de esferas animado, transiciones de 200 ms en hover y una entrada `fade-up` de 400 ms
   por página; todo se desactiva con `prefers-reduced-motion`.
+- **Animaciones al hacer scroll (AOS)**: librería `aos`, inicializada en `components/layout/AosInit.tsx` (montado en
+  `app/layout.tsx`; 600 ms, `once: true`, se recalcula en cada navegación). Para animar un elemento esparce
+  `{...aos("fade-up", delay)}` de `lib/aos.ts` (también lo acepta `Card`); en listas usa `stagger(index, columnas)`
+  para el retraso. No escribas `data-aos` a mano: el helper añade `suppressHydrationWarning` (AOS agrega clases
+  antes de que React hidrate la página). `app/aos.css` desactiva AOS con `prefers-reduced-motion` y un
+  `<noscript>` en el layout muestra el contenido sin JS. El header no se anima.
 - **Componentes base**: tarjetas `rounded-xl border bg-surface`; botones `ButtonLink` (primary/secondary/ghost);
   etiquetas `Tag` en mono; secciones con `SectionHeading` (eyebrow mono + h2).
 
 ## Convenciones
 
 - Server Components por defecto. `"use client"` solo para interacción: `NavLinks` (ruta activa), `MobileMenu`,
-  `FilterChips`, `ProjectExplorer`, `CertificationExplorer`, `CopyButton`, `SphereBackground` (animación del fondo).
+  `FilterChips`, `ProjectExplorer`, `CertificationExplorer`, `CopyButton`, `SphereBackground` (animación del fondo),
+  `AosInit` (animaciones al hacer scroll).
 - Un solo `<h1>` por página (lo da `PageHeader` o el hero).
 - Imágenes siempre con `next/image`, contenedor con `aspect-*` + `fill` + `sizes` (evita CLS). Usa `preload`
   (no `priority`, deprecado en Next 16) solo en la imagen principal visible. Las calidades permitidas se declaran

@@ -1,0 +1,11 @@
+/*
+ * Ajustes de AOS (Animate On Scroll). Los estilos base vienen de `aos/dist/aos.css`.
+ * Con movimiento reducido, todo elemento con `data-aos` se muestra sin animación.
+ */
+@media (prefers-reduced-motion: reduce) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

@@ -2,15 +2,16 @@ import { FiArrowUpRight } from "react-icons/fi";
 import type { ContactChannel } from "@/types/content";
 import { Card } from "@/components/ui/Card";
 import { Icon } from "@/components/ui/Icon";
+import { aos } from "@/lib/aos";
 import { CopyButton } from "./CopyButton";
 
 /** Tarjeta de canal de contacto. Toda la tarjeta es clicable (enlace estirado). */
-export function ContactChannelCard({ channel }: { channel: ContactChannel }) {
+export function ContactChannelCard({ channel, delay = 0 }: { channel: ContactChannel; delay?: number }) {
   const external = !channel.href.startsWith("mailto:");
   const copyable = channel.id === "email" || channel.id === "whatsapp";
 
   return (
-    <Card as="li" interactive className="group relative flex items-start gap-4 p-5 sm:p-6">
+    <Card as="li" interactive {...aos("fade-up", delay)} className="group relative flex items-start gap-4 p-5 sm:p-6">
       <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent">
         <Icon name={channel.icon} className="size-5" />
       </span>

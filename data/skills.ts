@@ -11,7 +11,7 @@ export const skillGroups: SkillGroup[] = [
     description: "Lenguajes de programación, consulta y marcado que uso a diario.",
     icon: "code",
     skills: [
-      { name: "Python", icon: "python", level: "Avanzado" },
+      { name: "Python", icon: "python" },
       { name: "TypeScript", icon: "typescript" },
       { name: "JavaScript", icon: "javascript" },
       { name: "SQL", icon: "sql" },
