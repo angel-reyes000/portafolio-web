@@ -134,19 +134,23 @@ para un tono formal:
   **No uses hex ni la paleta de Tailwind en componentes**: usa tokens.
 - **Tipografía**: Geist Sans (texto y títulos, `tracking-tight` en títulos) + Geist Mono (etiquetas, fechas, conteos).
 - **Tema**: oscuro único (`color-scheme: dark`); no hay conmutador claro/oscuro ni variante `dark:`.
-- **Fondo de marca**: la imagen de esferas rojas del portafolio original (`public/images/background/`,
-  `fondo.webp` 1920 px para ≥ 768 px y `fondo-movil.webp` para móvil) cubre todas las páginas completas.
-  Es un `body::before` fijo con el velo `--veil` encima para el contraste del texto; las secciones son
-  transparentes. Para más o menos visibilidad de la imagen, ajusta la opacidad de `--veil`.
-- **Movimiento**: transiciones de 200 ms en hover y una entrada `fade-up` de 400 ms por página;
-  todo se desactiva con `prefers-reduced-motion`.
+- **Fondo de marca**: las esferas rojas del portafolio original, animadas: `components/layout/SphereBackground.tsx`
+  (montado en `app/layout.tsx`) recrea `fondo.webp` en código y hace que las esferas vengan hacia la cámara sin
+  fin. Cada esfera nace al fondo con opacidad 0, crece y sale por el borde; siempre hay ≥ 5 visibles. El aspecto
+  (degradado del fondo y de cada esfera) está en `.sphere-field` / `.sphere` de `app/globals.css`; velocidad,
+  cantidad y tamaños en `CONFIG` del componente. Debajo queda la imagen estática (`body::before`, `fondo.webp`
+  ≥ 768 px y `fondo-movil.webp` en móvil), visible mientras carga el JS y con `prefers-reduced-motion`. Ambas
+  capas llevan el velo `--veil` para el contraste del texto; las secciones son transparentes. Para más o menos
+  visibilidad del fondo, ajusta la opacidad de `--veil`.
+- **Movimiento**: fondo de esferas animado, transiciones de 200 ms en hover y una entrada `fade-up` de 400 ms
+  por página; todo se desactiva con `prefers-reduced-motion`.
 - **Componentes base**: tarjetas `rounded-xl border bg-surface`; botones `ButtonLink` (primary/secondary/ghost);
   etiquetas `Tag` en mono; secciones con `SectionHeading` (eyebrow mono + h2).
 
 ## Convenciones
 
 - Server Components por defecto. `"use client"` solo para interacción: `NavLinks` (ruta activa), `MobileMenu`,
-  `FilterChips`, `ProjectExplorer`, `CertificationExplorer`, `CopyButton`.
+  `FilterChips`, `ProjectExplorer`, `CertificationExplorer`, `CopyButton`, `SphereBackground` (animación del fondo).
 - Un solo `<h1>` por página (lo da `PageHeader` o el hero).
 - Imágenes siempre con `next/image`, contenedor con `aspect-*` + `fill` + `sizes` (evita CLS). Usa `preload`
   (no `priority`, deprecado en Next 16) solo en la imagen principal visible. Las calidades permitidas se declaran

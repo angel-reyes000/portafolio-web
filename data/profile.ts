@@ -22,7 +22,6 @@ export const profile: Profile = {
     height: 437,
   },
   highlights: [
-    { label: "Semestre actual", value: "7.º" },
     { label: "Experiencia actual", value: "Schneider Electric · Nobum" },
     { label: "Ubicación", value: "Nuevo León, MX" },
   ],
