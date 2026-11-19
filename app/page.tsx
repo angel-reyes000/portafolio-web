@@ -1,69 +1,173 @@
 import Image from "next/image";
+import Link from "next/link";
+import { FiArrowRight, FiDownload, FiMapPin } from "react-icons/fi";
+import { ExperienceItem } from "@/components/experience/ExperienceItem";
+import { EducationItem } from "@/components/education/EducationItem";
+import { ProjectCard } from "@/components/projects/ProjectCard";
+import { PersonJsonLd } from "@/components/seo/PersonJsonLd";
+import { CtaBanner } from "@/components/shared/CtaBanner";
+import { ButtonLink } from "@/components/ui/ButtonLink";
+import { Container } from "@/components/ui/Container";
+import { Icon } from "@/components/ui/Icon";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { certifications, issuers } from "@/data/certifications";
+import { education } from "@/data/education";
+import { experience } from "@/data/experience";
+import { profile } from "@/data/profile";
+import { featuredProjects, projects } from "@/data/projects";
+import { siteConfig } from "@/data/site";
+import { skillGroups } from "@/data/skills";
 
-export default function Home() {
+const stats = [
+  { value: projects.length, label: "Proyectos" },
+  { value: certifications.length, label: "Certificaciones" },
+  { value: issuers.length, label: "Instituciones emisoras" },
+  { value: education[0]?.endYear ?? "—", label: "Egreso previsto" },
+];
+
+const stack = skillGroups
+  .filter((group) => group.id !== "especialidades")
+  .flatMap((group) => group.skills)
+  .filter((skill) => skill.icon);
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <PersonJsonLd />
+
+      {/* Hero */}
+      <section className="border-b border-border" aria-labelledby="hero-title">
+        <Container className="grid items-center gap-12 py-16 sm:py-24 lg:grid-cols-[1.4fr_1fr] lg:py-28">
+          <div>
+            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 font-mono text-xs text-muted">
+              <span className="size-1.5 rounded-full bg-accent" aria-hidden="true" />
+              {profile.role}
+            </p>
+            <h1 id="hero-title" className="text-4xl font-semibold tracking-tight text-fg sm:text-5xl lg:text-6xl">
+              Hola, soy {profile.displayName}.
+            </h1>
+            <p className="mt-4 max-w-xl text-xl font-medium tracking-tight text-fg/80 sm:text-2xl">{profile.headline}</p>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg">{profile.summary}</p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <ButtonLink href="/proyectos" icon={FiArrowRight} iconPosition="end">
+                Ver proyectos
+              </ButtonLink>
+              <ButtonLink href={siteConfig.cv.href} download={siteConfig.cv.downloadName} variant="secondary" icon={FiDownload}>
+                Descargar CV
+              </ButtonLink>
+            </div>
+
+            <p className="mt-8 inline-flex items-center gap-2 text-sm text-muted">
+              <FiMapPin className="size-4" aria-hidden="true" />
+              {profile.location}
+            </p>
+          </div>
+
+          <div className="mx-auto w-full max-w-xs sm:max-w-sm lg:max-w-none">
+            <div className="relative aspect-square overflow-hidden rounded-2xl border border-border bg-surface">
+              <Image
+                src={profile.photo.src}
+                alt={profile.photo.alt}
+                fill
+                preload
+                sizes="(min-width: 1024px) 400px, 384px"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Cifras */}
+      <section aria-label="Resumen" className="border-b border-border">
+        <Container>
+          <dl className="grid grid-cols-2 divide-border md:grid-cols-4 md:divide-x">
+            {stats.map((stat) => (
+              <div key={stat.label} className="px-2 py-8 md:px-8 md:first:pl-0">
+                <dt className="text-sm text-muted">{stat.label}</dt>
+                <dd className="mt-1 text-3xl font-semibold tracking-tight text-fg">{stat.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </Container>
+      </section>
+
+      {/* Proyectos destacados */}
+      <section className="py-16 sm:py-24" aria-labelledby="destacados">
+        <Container>
+          <SectionHeading
+            id="destacados"
+            eyebrow="Trabajo seleccionado"
+            title="Proyectos destacados"
+            description="Una muestra de aplicaciones web, inteligencia artificial y automatización que he desarrollado."
+            action={{ label: "Ver todos los proyectos", href: "/proyectos" }}
+          />
+          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredProjects.map((project) => (
+              <li key={project.slug}>
+                <ProjectCard project={project} variant="compact" />
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
+      {/* Trayectoria */}
+      <section className="border-y border-border bg-surface/50 py-16 sm:py-24" aria-labelledby="trayectoria">
+        <Container>
+          <SectionHeading
+            id="trayectoria"
+            eyebrow="Trayectoria"
+            title="Experiencia y formación"
+            action={{ label: "Ver experiencia completa", href: "/experiencia" }}
+          />
+          <div className="grid gap-8 lg:grid-cols-[1.5fr_1fr]">
+            <div className="timeline flex flex-col gap-6">
+              {experience.slice(0, 2).map((item) => (
+                <ExperienceItem key={item.id} item={item} variant="compact" />
+              ))}
+            </div>
+            <div className="flex flex-col gap-6">
+              {education.map((item) => (
+                <EducationItem key={item.id} item={item} />
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Stack */}
+      <section className="py-16 sm:py-24" aria-labelledby="stack">
+        <Container>
+          <SectionHeading
+            id="stack"
+            eyebrow="Stack"
+            title="Tecnologías con las que trabajo"
+            action={{ label: "Ver habilidades", href: "/habilidades" }}
+          />
+          <ul className="flex flex-wrap gap-2.5">
+            {stack.map((skill) => (
+              <li
+                key={skill.name}
+                className="flex h-11 items-center gap-2.5 rounded-lg border border-border bg-surface px-4 text-sm font-medium text-fg"
+              >
+                {skill.icon && <Icon name={skill.icon} className="size-[18px] shrink-0 text-muted" />}
+                {skill.name}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-8 text-sm text-muted">
+            Respaldado por {certifications.length} certificaciones de{" "}
+            {issuers.map((issuer) => issuer.shortName).join(", ")}.{" "}
+            <Link href="/certificaciones" className="font-medium text-accent hover:text-accent-hover">
+              Ver certificaciones
+            </Link>
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        </Container>
+      </section>
+
+      <CtaBanner />
+    </>
   );
 }
