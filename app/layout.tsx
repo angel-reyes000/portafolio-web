@@ -1,12 +1,15 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { AosInit } from "@/components/layout/AosInit";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { SphereBackground } from "@/components/layout/SphereBackground";
 import { profile } from "@/data/profile";
 import { siteConfig } from "@/data/site";
+import "aos/dist/aos.css";
 import "./globals.css";
+import "./aos.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -51,6 +54,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <SiteFooter />
+        <AosInit />
+        <noscript>
+          <style>{"[data-aos]{opacity:1!important;transform:none!important}"}</style>
+        </noscript>
       </body>
     </html>
   );

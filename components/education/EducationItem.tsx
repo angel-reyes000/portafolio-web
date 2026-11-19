@@ -1,10 +1,11 @@
 import { FiBookOpen } from "react-icons/fi";
 import type { Education } from "@/types/content";
 import { Card } from "@/components/ui/Card";
+import { aos } from "@/lib/aos";
 
 export function EducationItem({ item }: { item: Education }) {
   return (
-    <Card as="article" className="flex flex-col gap-4 p-6 sm:flex-row sm:items-start">
+    <Card as="article" {...aos("fade-up")} className="flex flex-col gap-4 p-6 sm:flex-row sm:items-start">
       <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent">
         <FiBookOpen className="size-5" aria-hidden="true" />
       </span>

@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { experience } from "@/data/experience";
 import { featuredProjects } from "@/data/projects";
+import { aos, stagger } from "@/lib/aos";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
@@ -44,8 +45,8 @@ export default function ExperiencePage() {
             action={{ label: "Ver todos los proyectos", href: "/proyectos" }}
           />
           <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredProjects.map((project) => (
-              <li key={project.slug}>
+            {featuredProjects.map((project, index) => (
+              <li key={project.slug} {...aos("fade-up", stagger(index))}>
                 <ProjectCard project={project} variant="compact" />
               </li>
             ))}

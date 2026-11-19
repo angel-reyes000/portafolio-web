@@ -2,6 +2,7 @@ import { FiCalendar } from "react-icons/fi";
 import type { Experience } from "@/types/content";
 import { Card } from "@/components/ui/Card";
 import { TagList } from "@/components/ui/Tag";
+import { aos } from "@/lib/aos";
 import { formatDateRange, monthsBetween } from "@/lib/utils";
 
 interface ExperienceItemProps {
@@ -14,7 +15,7 @@ export function ExperienceItem({ item, variant = "full" }: ExperienceItemProps) 
   const months = item.endDate ? monthsBetween(item.startDate, item.endDate) : null;
 
   return (
-    <article className="relative pl-8">
+    <article {...aos("fade-up")} className="relative pl-8">
       <span
         className="absolute top-1.5 left-0 size-[15px] rounded-full border-4 border-bg bg-accent ring-1 ring-border-strong"
         aria-hidden="true"

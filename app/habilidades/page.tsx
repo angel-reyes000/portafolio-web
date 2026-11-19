@@ -3,6 +3,7 @@ import { SkillGroupCard } from "@/components/skills/SkillGroupCard";
 import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { skillGroups } from "@/data/skills";
+import { stagger } from "@/lib/aos";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
@@ -24,8 +25,8 @@ export default function SkillsPage() {
       <section className="py-16 sm:py-20" aria-label="Grupos de habilidades">
         <Container>
           <div className="grid gap-6 md:grid-cols-2">
-            {skillGroups.map((group) => (
-              <SkillGroupCard key={group.id} group={group} />
+            {skillGroups.map((group, index) => (
+              <SkillGroupCard key={group.id} group={group} delay={stagger(index, 2)} />
             ))}
           </div>
         </Container>

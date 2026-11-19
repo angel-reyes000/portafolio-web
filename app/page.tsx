@@ -15,6 +15,7 @@ import { experience } from "@/data/experience";
 import { profile } from "@/data/profile";
 import { featuredProjects, projects } from "@/data/projects";
 import { siteConfig } from "@/data/site";
+import { aos, stagger } from "@/lib/aos";
 import { skillGroups } from "@/data/skills";
 
 const stats = [
@@ -37,17 +38,17 @@ export default function HomePage() {
       <section className="border-b border-border" aria-labelledby="hero-title">
         <Container className="py-16 sm:py-24 lg:py-28">
           <div>
-            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 font-mono text-xs text-muted">
+            <p {...aos("fade-up")} className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 font-mono text-xs text-muted">
               <span className="size-1.5 rounded-full bg-accent" aria-hidden="true" />
               {profile.role}
             </p>
-            <h1 id="hero-title" className="text-4xl font-semibold tracking-tight text-fg sm:text-5xl lg:text-6xl">
+            <h1 {...aos("fade-up", 100)} id="hero-title" className="text-4xl font-semibold tracking-tight text-fg sm:text-5xl lg:text-6xl">
               Hola, soy {profile.displayName}.
             </h1>
-            <p className="mt-4 max-w-xl text-xl font-medium tracking-tight text-fg/80 sm:text-2xl">{profile.headline}</p>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg">{profile.summary}</p>
+            <p {...aos("fade-up", 200)} className="mt-4 max-w-xl text-xl font-medium tracking-tight text-fg/80 sm:text-2xl">{profile.headline}</p>
+            <p {...aos("fade-up", 300)} className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg">{profile.summary}</p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div {...aos("fade-up", 400)} className="mt-8 flex flex-wrap gap-3">
               <ButtonLink href="/proyectos" icon={FiArrowRight} iconPosition="end">
                 Ver proyectos
               </ButtonLink>
@@ -56,7 +57,7 @@ export default function HomePage() {
               </ButtonLink>
             </div>
 
-            <p className="mt-8 inline-flex items-center gap-2 text-sm text-muted">
+            <p {...aos("fade-up", 500)} className="mt-8 inline-flex items-center gap-2 text-sm text-muted">
               <FiMapPin className="size-4" aria-hidden="true" />
               {profile.location}
             </p>
@@ -68,8 +69,8 @@ export default function HomePage() {
       <section aria-label="Resumen" className="border-b border-border">
         <Container>
           <dl className="grid grid-cols-2 divide-border md:grid-cols-4 md:divide-x">
-            {stats.map((stat) => (
-              <div key={stat.label} className="px-2 py-8 md:px-8 md:first:pl-0">
+            {stats.map((stat, index) => (
+              <div key={stat.label} {...aos("fade-up", stagger(index, 4))} className="px-2 py-8 md:px-8 md:first:pl-0">
                 <dt className="text-sm text-muted">{stat.label}</dt>
                 <dd className="mt-1 text-3xl font-semibold tracking-tight text-fg">{stat.value}</dd>
               </div>
@@ -89,8 +90,8 @@ export default function HomePage() {
             action={{ label: "Ver todos los proyectos", href: "/proyectos" }}
           />
           <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredProjects.map((project) => (
-              <li key={project.slug}>
+            {featuredProjects.map((project, index) => (
+              <li key={project.slug} {...aos("fade-up", stagger(index))}>
                 <ProjectCard project={project} variant="compact" />
               </li>
             ))}
@@ -132,9 +133,10 @@ export default function HomePage() {
             action={{ label: "Ver habilidades", href: "/habilidades" }}
           />
           <ul className="flex flex-wrap gap-2.5">
-            {stack.map((skill) => (
+            {stack.map((skill, index) => (
               <li
                 key={skill.name}
+                {...aos("zoom-in", stagger(index, 8, 40))}
                 className="flex h-11 items-center gap-2.5 rounded-lg border border-border bg-surface px-4 text-sm font-medium text-fg"
               >
                 {skill.icon && <Icon name={skill.icon} className="size-[18px] shrink-0 text-muted" />}
@@ -142,7 +144,7 @@ export default function HomePage() {
               </li>
             ))}
           </ul>
-          <p className="mt-8 text-sm text-muted">
+          <p {...aos("fade-up")} className="mt-8 text-sm text-muted">
             Respaldado por {certifications.length} certificaciones de{" "}
             {issuers.map((issuer) => issuer.shortName).join(", ")}.{" "}
             <Link href="/certificaciones" className="font-medium text-accent hover:text-accent-hover">

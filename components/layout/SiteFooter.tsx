@@ -5,6 +5,7 @@ import { mainNav } from "@/data/navigation";
 import { profile } from "@/data/profile";
 import { Container } from "@/components/ui/Container";
 import { Icon } from "@/components/ui/Icon";
+import { aos } from "@/lib/aos";
 import { isExternal } from "@/lib/utils";
 
 async function CopyrightYear() {
@@ -19,13 +20,13 @@ export function SiteFooter() {
   return (
     <footer className="mt-auto border-t border-border">
       <Container className="grid gap-10 py-12 md:grid-cols-[1.5fr_1fr_1fr]">
-        <div className="max-w-sm">
+        <div {...aos("fade-up")} className="max-w-sm">
           <p className="text-base font-semibold text-fg">{profile.displayName}</p>
           <p className="mt-1 text-sm text-muted">{profile.role}</p>
           <p className="mt-4 text-sm leading-relaxed text-muted">{profile.headline}</p>
         </div>
 
-        <nav aria-label="Secciones">
+        <nav {...aos("fade-up", 100)} aria-label="Secciones">
           <p className="mb-3 font-mono text-xs uppercase tracking-widest text-muted">Secciones</p>
           <ul className="grid grid-cols-2 gap-x-4 gap-y-2 md:grid-cols-1">
             {mainNav.map((item) => (
@@ -38,7 +39,7 @@ export function SiteFooter() {
           </ul>
         </nav>
 
-        <div>
+        <div {...aos("fade-up", 200)}>
           <p className="mb-3 font-mono text-xs uppercase tracking-widest text-muted">Contacto</p>
           <ul className="flex flex-col gap-2">
             {channels.map((channel) => (

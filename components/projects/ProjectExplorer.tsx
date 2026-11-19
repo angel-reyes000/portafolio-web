@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { projectCategories } from "@/data/projects";
 import type { Project, ProjectCategory } from "@/types/content";
+import { aos, stagger } from "@/lib/aos";
 import { FilterChips, type FilterOption } from "@/components/ui/FilterChips";
 import { ProjectCard } from "./ProjectCard";
 
@@ -26,13 +27,15 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
 
   return (
     <div>
-      <FilterChips label="Filtrar proyectos por categoría" options={options} value={filter} onChange={setFilter} />
+      <div {...aos("fade-up")}>
+        <FilterChips label="Filtrar proyectos por categoría" options={options} value={filter} onChange={setFilter} />
+      </div>
       <p className="sr-only" aria-live="polite">
         {visible.length} proyectos mostrados
       </p>
       <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((project, index) => (
-          <li key={project.slug}>
+          <li key={project.slug} {...aos("fade-up", stagger(index))}>
             <ProjectCard project={project} preload={index === 0} />
           </li>
         ))}
