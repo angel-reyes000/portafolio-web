@@ -18,6 +18,24 @@ const PYQT6_REPO = "https://github.com/angel-reyes000/Proyectos-Python-PyQt6.git
  */
 export const projects: Project[] = [
   {
+    slug: "5-y-gana",
+    title: "5 y Gana",
+    summary: "Juego caritativo de ruleta en tiempo real para una asociación benéfica, con donativos mediante Stripe.",
+    description:
+      "Aplicación full stack para una asociación caritativa: los usuarios se registran, realizan donativos con Stripe y reciben tickets para participar en un juego de cinco rondas con una ruleta sincronizada en tiempo real mediante Socket.IO, donde varios clientes ven el mismo giro y sus resultados al instante. Incluye autenticación con JWT, historial de resultados y progreso del sorteo, y un panel de administración para gestionar juegos, premios y ganadores. Desarrollada con Next.js, React, TypeScript y Tailwind CSS.",
+    category: "web",
+    context: "Profesional",
+    image: {
+      src: "/images/projects/5-y-gana.webp",
+      alt: "Pantalla de la ruleta de 5 y Gana con el progreso del sorteo, rondas, giros y tickets del usuario",
+      width: 1600,
+      height: 816,
+    },
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Socket.IO", "Stripe", "JWT"],
+    links: [],
+    inDevelopment: true,
+  },
+  {
     slug: "wallet-ai",
     title: "Wallet AI",
     summary: "Finanzas personales con un asistente de IA multiagente, gráficas interactivas y calendario.",
