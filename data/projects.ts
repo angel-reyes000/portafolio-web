@@ -22,7 +22,7 @@ export const projects: Project[] = [
     title: "5 y Gana",
     summary: "Juego caritativo de ruleta en tiempo real para una asociación benéfica, con donativos mediante Stripe.",
     description:
-      "Aplicación full stack para una asociación caritativa: los usuarios se registran, realizan donativos con Stripe y reciben tickets para participar en un juego de cinco rondas con una ruleta sincronizada en tiempo real mediante Socket.IO, donde varios clientes ven el mismo giro y sus resultados al instante. Incluye autenticación con JWT, historial de resultados y progreso del sorteo, y un panel de administración para gestionar juegos, premios y ganadores. Desarrollada con Next.js, React, TypeScript y Tailwind CSS.",
+      "Aplicación full stack para una asociación caritativa: los usuarios se registran, donan con Stripe (cada $100 MXN genera un ticket) y participan en un sorteo de cinco rondas con una ruleta sincronizada en tiempo real mediante Socket.IO, donde todos los clientes ven el mismo giro y sus resultados al instante. El frontend está desarrollado con Next.js, React, TypeScript y Tailwind CSS; el backend, con Node.js, Express y PostgreSQL, implementa autenticación con JWT y bcrypt, transacciones SQL para donaciones y giros, y selección aleatoria segura de números ganadores. Incluye un panel de administración para gestionar juegos, premios y ganadores.",
     category: "web",
     context: "Profesional",
     image: {
@@ -31,7 +31,7 @@ export const projects: Project[] = [
       width: 1600,
       height: 816,
     },
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Socket.IO", "Stripe", "JWT"],
+    technologies: ["Next.js", "TypeScript", "Express", "PostgreSQL", "Socket.IO", "Stripe", "JWT"],
     links: [],
     inDevelopment: true,
   },
