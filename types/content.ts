@@ -86,6 +86,8 @@ export interface Project {
   featured?: boolean;
   /** Indica que el proyecto ya fue reemplazado por una versión más reciente. */
   legacy?: boolean;
+  /** Proyecto aún en construcción: en lugar de enlaces muestra "En desarrollo". */
+  inDevelopment?: boolean;
 }
 
 export interface Skill {

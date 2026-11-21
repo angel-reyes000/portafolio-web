@@ -11,7 +11,7 @@ import { createPageMetadata } from "@/lib/metadata";
 export const metadata = createPageMetadata({
   title: "Proyectos",
   description:
-    "Proyectos personales y académicos: aplicaciones web con Next.js y React, asistentes con inteligencia artificial, aplicaciones de escritorio con PyQt6 y diseños UI/UX en Figma.",
+    "Proyectos: aplicaciones web con Next.js y React, asistentes con inteligencia artificial, aplicaciones de escritorio con PyQt6 y diseños UI/UX en Figma.",
   path: "/proyectos",
 });
 
@@ -22,7 +22,7 @@ export default function ProjectsPage() {
     <>
       <PageHeader
         eyebrow="Proyectos"
-        title="Proyectos personales y académicos"
+        title="Proyectos"
         description="Aplicaciones web, inteligencia artificial, software de escritorio y diseño de interfaces. Filtra por categoría para explorar."
       >
         {github && (

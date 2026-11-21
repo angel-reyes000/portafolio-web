@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { IconType } from "react-icons";
-import { FiExternalLink, FiFigma, FiGithub } from "react-icons/fi";
+import { FiExternalLink, FiFigma, FiGithub, FiTool } from "react-icons/fi";
 import { projectCategories } from "@/data/projects";
 import type { Project, ProjectLinkType } from "@/types/content";
 import { Card } from "@/components/ui/Card";
@@ -37,10 +37,6 @@ export function ProjectCard({ project, variant = "full", preload = false }: Proj
       <div className="flex flex-1 flex-col p-5 sm:p-6">
         <div className="mb-3 flex flex-wrap items-center gap-2 text-xs">
           <span className="font-mono uppercase tracking-wider text-accent">{projectCategories[project.category]}</span>
-          <span className="text-border-strong" aria-hidden="true">
-            /
-          </span>
-          <span className="text-muted">{project.context}</span>
           {project.legacy && (
             <span className="rounded-full border border-border px-2 py-0.5 text-muted">Versión anterior</span>
           )}
@@ -53,7 +49,14 @@ export function ProjectCard({ project, variant = "full", preload = false }: Proj
 
         <TagList items={project.technologies} className="mt-4" />
 
-        {project.links.length > 0 && (
+        {project.inDevelopment && (
+          <div className="mt-5 flex items-center gap-2 border-t border-border pt-4 text-sm font-medium text-muted">
+            <FiTool className="size-4 text-accent" aria-hidden="true" />
+            En desarrollo
+          </div>
+        )}
+
+        {!project.inDevelopment && project.links.length > 0 && (
           <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 border-t border-border pt-4">
             {project.links.map((link) => {
               const meta = linkMeta[link.type];
